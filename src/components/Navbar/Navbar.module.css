@@ -1,0 +1,19 @@
+.nav {
+  grid-area: n;
+  background-color: #c2c2c2;
+  padding: 6%;
+}
+
+.item {
+  color: white;
+  padding: 2px;
+}
+
+.item a.activeLink {
+  color: blue;
+}
+.avatar {
+  border-radius: 50%;
+  width: 10vh;
+  height: 10vh;
+}
