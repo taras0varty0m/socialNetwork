@@ -7,6 +7,41 @@
 .postsBlock {
   padding: 10px;
 }
+.form {
+  text-align: center;
+}
 .posts {
   margin-top: 10px;
+}
+.submit {
+  position: relative;
+  background-color: rgba(0, 0, 255, 0.72);
+  border: none;
+  color: #ffffff;
+  padding: 1%;
+  width: 100px;
+  text-align: center;
+  transition-duration: 0.4s;
+  overflow: hidden;
+  text-decoration: none;
+  cursor: pointer;
+}
+.submit:after {
+  content: "";
+  background: #f1f1f1;
+  display: block;
+  position: absolute;
+  padding-top: 300%;
+  padding-left: 350%;
+  margin-left: -20px !important;
+  margin-top: -120%;
+  opacity: 0;
+  transition: all 0.8s;
+}
+
+.submit:active:after {
+  padding: 0;
+  margin: 0;
+  opacity: 1;
+  transition: 0s;
 }

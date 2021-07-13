@@ -18,16 +18,12 @@ const MyPosts = (props) => {
   return (
     <div className={s.postsBlock}>
       <div>
-        <h3>My posts</h3>
         <div>
-          <form>
-            <textarea
-              name="text"
-              cols="15"
-              rows="5"
-              ref={newPostElement}
-            ></textarea>
-            <button type="submit" onClick={addPost}>
+          <form className={s.form}>
+            <h3>My posts</h3>
+            <textarea name="text" rows="3" ref={newPostElement}></textarea>
+            <br />
+            <button type="submit" onClick={addPost} className={s.submit}>
               Add post
             </button>
           </form>

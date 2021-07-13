@@ -1,6 +1,8 @@
 .item {
   color: blue;
+  background: white;
+  margin: 1%;
 }
 .item img {
-  width: 50px;
+  width: 30px;
 }
