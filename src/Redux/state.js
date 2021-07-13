@@ -1,3 +1,5 @@
+import { rerenderEntireTree } from "../render";
+
 export let state = {
   friendsPage: {
     friendsData: [
@@ -91,4 +93,13 @@ export let state = {
       { id: 6, message: "bye" },
     ],
   },
+};
+export let addPost = (postMessage) => {
+  let newPost = {
+    id: state.profilePage.postData.length + 1,
+    message: postMessage,
+    likesCount: 0,
+  };
+  state.profilePage.postData.push(newPost);
+  rerenderEntireTree(state);
 };
