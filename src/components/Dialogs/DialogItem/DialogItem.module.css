@@ -1,10 +1,15 @@
-.dialogs {
-  display: grid;
-  grid-template-columns: 2fr 10fr;
+.dialog {
+  background: white;
+  border-radius: 10%;
+  margin: 5px;
+  padding: 3px;
+  text-align: center;
 }
-.dialogsItems {
-  padding: 15px;
+
+.dialog a.activeLink {
+  color: blue;
 }
-.dialogsItems .active {
-  color: gold;
+.ava {
+  width: 40px;
+  height: 40px;
 }

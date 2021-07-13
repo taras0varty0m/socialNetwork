@@ -2,10 +2,10 @@
   grid-area: n;
   background-color: #c2c2c2;
   padding: 6%;
+  min-width: 80px;
 }
 
 .item {
-  color: white;
   padding: 2px;
 }
 

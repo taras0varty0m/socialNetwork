@@ -2,7 +2,7 @@ import React from "react";
 import s from "./Friends.module.css";
 const Friends = (props) => {
   const friends = props.friendsData.map((friend) => (
-    <div className={s.friend}>
+    <div className={s.friend} key={friend.id}>
       <img src={friend.avatar} alt="avatar" className={s.avatar} />
       <div className={s.friendName}>{friend.name}</div>
     </div>
