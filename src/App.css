@@ -6,7 +6,7 @@
     "h h"
     "n c";
 
-  grid-template-rows: 60px 1fr;
+  grid-template-rows: 50px 1fr;
   grid-template-columns: 1fr 11fr;
 }
 .app-wrapper-content {
@@ -17,4 +17,18 @@
 a {
   color: black;
   text-decoration: none; /* cancel underline */
+}
+@media screen and (max-width: 540px) {
+  .app-wrapper {
+    width: 90%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-areas:
+      "h h"
+      "c c"
+      "n n";
+
+    grid-template-rows: 50px 1fr;
+    grid-template-columns: 1fr 11fr;
+  }
 }

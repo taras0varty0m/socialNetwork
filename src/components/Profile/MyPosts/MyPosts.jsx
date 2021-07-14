@@ -14,14 +14,20 @@ const MyPosts = (props) => {
     let text = newPostElement.current.value;
     props.addPost(text);
   };
-
+  let postChange = () => {};
   return (
     <div className={s.postsBlock}>
       <div>
         <div>
           <form className={s.form}>
             <h3>My posts</h3>
-            <textarea name="text" rows="3" ref={newPostElement}></textarea>
+            <textarea
+              name="text"
+              rows="3"
+              ref={newPostElement}
+              value={props.newPostText}
+              onChange={postChange}
+            />
             <br />
             <button type="submit" onClick={addPost} className={s.submit}>
               Add post

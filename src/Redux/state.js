@@ -95,6 +95,10 @@ export let state = {
   },
 };
 export let addPost = (postMessage) => {
+  if (!postMessage.length) {
+    alert("post can't be empty");
+    return;
+  }
   let newPost = {
     id: state.profilePage.postData.length + 1,
     message: postMessage,
