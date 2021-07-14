@@ -11,10 +11,12 @@ const MyPosts = (props) => {
 
   const addPost = (e) => {
     e.preventDefault();
-    let text = newPostElement.current.value;
-    props.addPost(text);
+    props.addPost();
   };
-  let postChange = () => {};
+  let postChange = () => {
+    let text = newPostElement.current.value;
+    props.upadateNewPostText(text);
+  };
   return (
     <div className={s.postsBlock}>
       <div>
@@ -27,6 +29,7 @@ const MyPosts = (props) => {
               ref={newPostElement}
               value={props.newPostText}
               onChange={postChange}
+              placeholder="Поделитесь чем угодно(в рамках приличия =) )"
             />
             <br />
             <button type="submit" onClick={addPost} className={s.submit}>

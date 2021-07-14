@@ -82,6 +82,7 @@ export let state = {
           "https://illustrators.ru/uploads/illustration/image/1232594/main_%D1%8B%D1%8B%D1%8B%D1%8B.png",
       },
     ],
+    newPostText: "",
   },
   messegesPage: {
     messegesData: [
@@ -94,16 +95,21 @@ export let state = {
     ],
   },
 };
-export let addPost = (postMessage) => {
-  if (!postMessage.length) {
+export let addPost = () => {
+  if (!state.profilePage.newPostText.length) {
     alert("post can't be empty");
     return;
   }
   let newPost = {
     id: state.profilePage.postData.length + 1,
-    message: postMessage,
+    message: state.profilePage.newPostText,
     likesCount: 0,
   };
   state.profilePage.postData.push(newPost);
+  state.profilePage.newPostText = "";
+  rerenderEntireTree(state);
+};
+export let upadateNewPostText = (newText) => {
+  state.profilePage.newPostText = newText;
   rerenderEntireTree(state);
 };

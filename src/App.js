@@ -10,14 +10,12 @@ import Settings from "./components/Settings/Settings";
 import News from "./components/News/News";
 import Friends from "./components/Friends/Friends";
 
-
-
 const App = (props) => {
   return (
     <BrowserRouter>
       <div className="app-wrapper">
         <Header />
-        
+
         <Navbar />
         <div className="app-wrapper-content">
           <Route
@@ -35,6 +33,8 @@ const App = (props) => {
               <Profile
                 postData={props.state.profilePage.postData}
                 addPost={props.addPost}
+                newPostText={props.state.profilePage.newPostText}
+                upadateNewPostText={props.upadateNewPostText}
               />
             )}
           />
