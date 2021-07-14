@@ -1,5 +1,3 @@
-import { rerenderEntireTree } from "../render";
-
 export let state = {
   friendsPage: {
     friendsData: [
@@ -95,7 +93,7 @@ export let state = {
     ],
   },
 };
-export let addPost = () => {
+export const addPost = () => {
   if (!state.profilePage.newPostText.length) {
     alert("post can't be empty");
     return;
@@ -109,7 +107,11 @@ export let addPost = () => {
   state.profilePage.newPostText = "";
   rerenderEntireTree(state);
 };
-export let upadateNewPostText = (newText) => {
+export const upadateNewPostText = (newText) => {
   state.profilePage.newPostText = newText;
   rerenderEntireTree(state);
 };
+export const subscribe = (observer) => {
+  rerenderEntireTree = observer;
+};
+let rerenderEntireTree = () => {};
