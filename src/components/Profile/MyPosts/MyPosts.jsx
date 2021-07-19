@@ -9,33 +9,33 @@ const MyPosts = (props) => {
 
   let newPostElement = React.createRef();
 
-  const addPost = (e) => {
-    e.preventDefault();
-    props.addPost();
+  const addPost = () => {
+    props.dispatch({ type: "ADD-POST" });
   };
-  let postChange = () => {
+  let onPostChange = () => {
     let text = newPostElement.current.value;
-    props.upadateNewPostText(text);
+    let action = { type: "UPDATE-NEW-POST-TEXT", newText: text };
+    props.dispatch(action);
   };
   return (
     <div className={s.postsBlock}>
       <div>
         <div>
-          <form className={s.form}>
+          <div className={s.form}>
             <h3>My posts</h3>
             <textarea
               name="text"
               rows="3"
               ref={newPostElement}
               value={props.newPostText}
-              onChange={postChange}
+              onChange={onPostChange}
               placeholder="Поделитесь чем угодно(в рамках приличия =) )"
             />
             <br />
-            <button type="submit" onClick={addPost} className={s.submit}>
+            <button onClick={addPost} className={s.submit}>
               Add post
             </button>
-          </form>
+          </div>
         </div>
         <div className={s.posts}>{postsElements}</div>
       </div>
