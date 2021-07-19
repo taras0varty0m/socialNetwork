@@ -116,8 +116,6 @@ let store = {
       };
       this._state.profilePage.postData.push(newPost);
       this._state.profilePage.newPostText = "";
-      console.log(this._state.profilePage.newPostText);
-      debugger;
       this._callSubscriber(this._state);
     } else if (action.type === "UPDATE-NEW-POST-TEXT") {
       this._state.profilePage.newPostText = action.newText;

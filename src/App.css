@@ -12,6 +12,7 @@
 }
 .app-wrapper-content {
   grid-area: c;
+  padding: 10px;
   background-color: #d3d3d3;
   color: black;
   border-radius: 10px;
@@ -22,15 +23,14 @@ a {
 }
 @media screen and (max-width: 540px) {
   .app-wrapper {
-    width: 90%;
     margin: 0 auto;
     display: grid;
+    overflow-y: scroll;
+    height: 94vh;
     grid-template-areas:
       "h h"
       "c c"
       "n n";
-
-    grid-template-rows: 50px 1fr;
-    grid-template-columns: 1fr 11fr;
+    grid-template-rows: 50px 1fr 40px;
   }
 }

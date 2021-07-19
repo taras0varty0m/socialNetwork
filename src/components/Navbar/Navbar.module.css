@@ -21,11 +21,12 @@
 @media screen and (max-width: 540px) {
   .nav {
     position: fixed;
+    border-radius: 0;
     left: 0;
     bottom: 0;
     height: 3%;
     width: 94%;
-    padding: 3%;
+    padding: 5%;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
