@@ -1,5 +1,10 @@
 import { ADD_MESSAGE, UPDATE_NEW_MESSAGE_TEXT } from "./ADD_POST";
+export const addMessageActionCreator = () => ({ type: ADD_MESSAGE });
 
+export const updateNewMessageTextActionCreator = (text) => ({
+  type: UPDATE_NEW_MESSAGE_TEXT,
+  newText: text,
+});
 const dialogsReducer = (state, action) => {
   switch (action.type) {
     case ADD_MESSAGE:

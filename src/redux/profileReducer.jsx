@@ -1,4 +1,10 @@
 import { ADD_POST, UPDATE_NEW_POST_TEXT } from "./ADD_POST";
+export const addPostActionCreator = () => ({ type: ADD_POST });
+
+export const updateNewPostTextActionCreator = (text) => ({
+  type: UPDATE_NEW_POST_TEXT,
+  newText: text,
+});
 
 const profileReducer = (state, action) => {
   switch (action.type) {
