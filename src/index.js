@@ -12,6 +12,6 @@ let rerenderEntireTree = (state) => {
     document.getElementById("root")
   );
 };
-rerenderEntireTree(store.getState());
 
+rerenderEntireTree(store.getState());
 store.subscribe(rerenderEntireTree);

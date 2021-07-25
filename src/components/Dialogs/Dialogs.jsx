@@ -16,15 +16,14 @@ const Dialogs = (props) => {
       key={dialog.id}
     />
   ));
-  let newMessageElement = React.createRef();
   let messagesElements = props.messagesData.map((message) => (
     <Message message={message.message} key={message.id} />
   ));
   const addMessage = () => {
     props.dispatch(addMessageActionCreator());
   };
-  let onMessageChange = () => {
-    let text = newMessageElement.current.value;
+  let onMessageChange = (e) => {
+    let text = e.target.value;
     let action = updateNewMessageTextActionCreator(text);
     props.dispatch(action);
   };
@@ -37,8 +36,7 @@ const Dialogs = (props) => {
         <textarea
           name="text"
           rows="3"
-          ref={newMessageElement}
-          value={props.newPostText}
+          value={props.newMessageText}
           onChange={onMessageChange}
           placeholder="Введите сообщение"
         />

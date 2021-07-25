@@ -4,6 +4,9 @@ import {
   UPDATE_NEW_MESSAGE_TEXT,
   UPDATE_NEW_POST_TEXT,
 } from "./ADD_POST";
+import dialogsReducer from "./dialogsReducer";
+import friendsReducer from "./friendsReducer";
+import profileReducer from "./profileReducer";
 
 let store = {
   _state: {
@@ -51,6 +54,9 @@ let store = {
         { id: 1, message: "hi? how are you", likesCount: 12 },
         { id: 2, message: "It`s my first post", likesCount: 6 },
       ],
+      newPostText: "",
+    },
+    messagesPage: {
       dialogsData: [
         {
           id: 1,
@@ -88,9 +94,6 @@ let store = {
             "https://illustrators.ru/uploads/illustration/image/1232594/main_%D1%8B%D1%8B%D1%8B%D1%8B.png",
         },
       ],
-      newPostText: "",
-    },
-    messagesPage: {
       messagesData: [
         { id: 1, message: "hi" },
         { id: 2, message: "Yo" },
@@ -102,9 +105,7 @@ let store = {
       newMessageText: "",
     },
   },
-  _callSubscriber() {
-    console.log("state changed");
-  },
+  _callSubscriber() {},
   getState() {
     return this._state;
   },
@@ -112,45 +113,10 @@ let store = {
     this._callSubscriber = observer;
   },
   dispatch(action) {
-    switch (action.type) {
-      case "ADD-POST":
-        if (!this._state.profilePage.newPostText.length) {
-          alert("post can't be empty");
-          return;
-        }
-        let newPost = {
-          id: this._state.profilePage.postData.length + 1,
-          message: this._state.profilePage.newPostText,
-          likesCount: 0,
-        };
-        this._state.profilePage.postData.push(newPost);
-        this._state.profilePage.newPostText = "";
-        this._callSubscriber(this._state);
-        break;
-      case "UPDATE-NEW-POST-TEXT":
-        this._state.profilePage.newPostText = action.newText;
-        this._callSubscriber(this._state);
-        break;
-      case "ADD-MESSAGE":
-        if (!this._state.messagesPage.newMessageText.length) {
-          alert("message can't be empty");
-          return;
-        }
-        let newMessage = {
-          id: this._state.messagesPage.messagesData.length + 1,
-          message: this._state.messagesPage.newMessageText,
-        };
-        this._state.messagesPage.messagesData.push(newMessage);
-        this._state.messagesPage.newMessageText = "";
-        this._callSubscriber(this._state);
-        break;
-      case "UPDATE-NEW-MESSAGE-TEXT":
-        this._state.messagesPage.newMessageText = action.newText;
-        this._callSubscriber(this._state);
-        break;
-      default:
-        break;
-    }
+    this._state.profilePage = profileReducer(this._state.profilePage, action);
+    this._state.friendsPage = friendsReducer(this._state.friendsPage, action);
+    this._state.messagesPage = dialogsReducer(this._state.messagesPage, action);
+    this._callSubscriber(this._state);
   },
 };
 
@@ -167,6 +133,5 @@ export const updateNewMessageTextActionCreator = (text) => ({
   type: UPDATE_NEW_MESSAGE_TEXT,
   newText: text,
 });
-
 export default store;
 window.store = store;
