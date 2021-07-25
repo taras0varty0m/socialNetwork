@@ -28,7 +28,8 @@ const App = (props) => {
             render={() => (
               <Dialogs
                 dialogsData={props.state.profilePage.dialogsData}
-                messegesData={props.state.messegesPage.messegesData}
+                dispatch={props.dispatch}
+                messagesData={props.state.messagesPage.messagesData}
               />
             )}
           />

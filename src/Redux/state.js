@@ -1,3 +1,10 @@
+import {
+  ADD_MESSAGE,
+  ADD_POST,
+  UPDATE_NEW_MESSAGE_TEXT,
+  UPDATE_NEW_POST_TEXT,
+} from "./ADD_POST";
+
 let store = {
   _state: {
     friendsPage: {
@@ -83,8 +90,8 @@ let store = {
       ],
       newPostText: "",
     },
-    messegesPage: {
-      messegesData: [
+    messagesPage: {
+      messagesData: [
         { id: 1, message: "hi" },
         { id: 2, message: "Yo" },
         { id: 3, message: "hey" },
@@ -92,6 +99,7 @@ let store = {
         { id: 5, message: "W r u doing?" },
         { id: 6, message: "bye" },
       ],
+      newMessageText: "",
     },
   },
   _callSubscriber() {
@@ -104,24 +112,61 @@ let store = {
     this._callSubscriber = observer;
   },
   dispatch(action) {
-    if (action.type === "ADD-POST") {
-      if (!this._state.profilePage.newPostText.length) {
-        alert("post can't be empty");
-        return;
-      }
-      let newPost = {
-        id: this._state.profilePage.postData.length + 1,
-        message: this._state.profilePage.newPostText,
-        likesCount: 0,
-      };
-      this._state.profilePage.postData.push(newPost);
-      this._state.profilePage.newPostText = "";
-      this._callSubscriber(this._state);
-    } else if (action.type === "UPDATE-NEW-POST-TEXT") {
-      this._state.profilePage.newPostText = action.newText;
-      this._callSubscriber(this._state);
+    switch (action.type) {
+      case "ADD-POST":
+        if (!this._state.profilePage.newPostText.length) {
+          alert("post can't be empty");
+          return;
+        }
+        let newPost = {
+          id: this._state.profilePage.postData.length + 1,
+          message: this._state.profilePage.newPostText,
+          likesCount: 0,
+        };
+        this._state.profilePage.postData.push(newPost);
+        this._state.profilePage.newPostText = "";
+        this._callSubscriber(this._state);
+        break;
+      case "UPDATE-NEW-POST-TEXT":
+        this._state.profilePage.newPostText = action.newText;
+        this._callSubscriber(this._state);
+        break;
+      case "ADD-MESSAGE":
+        if (!this._state.messagesPage.newMessageText.length) {
+          alert("message can't be empty");
+          return;
+        }
+        let newMessage = {
+          id: this._state.messagesPage.messagesData.length + 1,
+          message: this._state.messagesPage.newMessageText,
+        };
+        this._state.messagesPage.messagesData.push(newMessage);
+        this._state.messagesPage.newMessageText = "";
+        this._callSubscriber(this._state);
+        break;
+      case "UPDATE-NEW-MESSAGE-TEXT":
+        this._state.messagesPage.newMessageText = action.newText;
+        this._callSubscriber(this._state);
+        break;
+      default:
+        break;
     }
   },
 };
+
+export const addPostActionCreator = () => ({ type: ADD_POST });
+
+export const updateNewPostTextActionCreator = (text) => ({
+  type: UPDATE_NEW_POST_TEXT,
+  newText: text,
+});
+
+export const addMessageActionCreator = () => ({ type: ADD_MESSAGE });
+
+export const updateNewMessageTextActionCreator = (text) => ({
+  type: UPDATE_NEW_MESSAGE_TEXT,
+  newText: text,
+});
+
 export default store;
 window.store = store;
