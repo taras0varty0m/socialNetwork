@@ -17,7 +17,7 @@ const profileReducer = (state = initialState, action) => {
     case ADD_POST:
       if (!state.newPostText.length) {
         alert("post can't be empty");
-        return;
+        return state;
       }
       let newPost = {
         id: state.postData.length + 1,

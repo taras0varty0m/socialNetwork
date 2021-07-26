@@ -58,7 +58,7 @@ const dialogsReducer = (state = initialState, action) => {
     case ADD_MESSAGE:
       if (!state.newMessageText.length) {
         alert("message can't be empty");
-        return;
+        return state;
       }
       let newMessage = {
         id: state.messagesData.length + 1,
