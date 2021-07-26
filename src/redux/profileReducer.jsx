@@ -1,12 +1,18 @@
-import { ADD_POST, UPDATE_NEW_POST_TEXT } from "./ADD_POST";
+import { ADD_POST, UPDATE_NEW_POST_TEXT } from "./ActionType";
 export const addPostActionCreator = () => ({ type: ADD_POST });
 
 export const updateNewPostTextActionCreator = (text) => ({
   type: UPDATE_NEW_POST_TEXT,
   newText: text,
 });
-
-const profileReducer = (state, action) => {
+let initialState = {
+  postData: [
+    { id: 1, message: "hi? how are you", likesCount: 12 },
+    { id: 2, message: "It`s my first post", likesCount: 6 },
+  ],
+  newPostText: "",
+};
+const profileReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_POST:
       if (!state.newPostText.length) {

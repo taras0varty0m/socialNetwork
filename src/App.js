@@ -27,9 +27,9 @@ const App = (props) => {
             path="/dialogs"
             render={() => (
               <Dialogs
-                dialogsData={props.state.messagesPage.dialogsData}
-                messagesData={props.state.messagesPage.messagesData}
-                newMessageText={props.state.messagesPage.newMessageText}
+                dialogsData={props.state.dialogsReducer.dialogsData}
+                messagesData={props.state.dialogsReducer.messagesData}
+                newMessageText={props.state.dialogsReducer.newMessageText}
                 dispatch={props.dispatch}
               />
             )}
@@ -38,8 +38,8 @@ const App = (props) => {
             path="/profile"
             render={() => (
               <Profile
-                postData={props.state.profilePage.postData}
-                newPostText={props.state.profilePage.newPostText}
+                postData={props.state.profileReducer.postData}
+                newPostText={props.state.profileReducer.newPostText}
                 dispatch={props.dispatch}
               />
             )}
@@ -50,7 +50,7 @@ const App = (props) => {
           <Route
             path="/friends"
             render={() => (
-              <Friends friendsData={props.state.friendsPage.friendsData} />
+              <Friends friendsData={props.state.friendsReducer.friendsData} />
             )}
           />
           <Route component={NotFound} />
