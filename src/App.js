@@ -12,6 +12,7 @@ import NotFound from "./components/NotFound/NotFound";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 
 const App = (props) => {
+  debugger;
   return (
     <div className="app-wrapper">
       <Header />
@@ -36,7 +37,9 @@ const App = (props) => {
           <Route path="/news" render={() => <News />} />
           <Route
             path="/friends"
-            render={() => <Friends friendsData={props.state.friendsPage} />}
+            render={() => (
+              <Friends friendsData={props.state.friendsPage.friendsData} />
+            )}
           />
           <Route component={NotFound} />
         </Switch>
