@@ -7,7 +7,6 @@ import Profile from "./components/Profile/Profile";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 import News from "./components/News/News";
-import Friends from "./components/Friends/Friends";
 import NotFound from "./components/NotFound/NotFound";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 
@@ -28,7 +27,6 @@ const App = () => {
           <Route path="/music" render={() => <Music />} />
           <Route path="/settings" render={() => <Settings />} />
           <Route path="/news" render={() => <News />} />
-          <Route path="/friends" render={() => <Friends />} />
           <Route component={NotFound} />
         </Switch>
       </div>
