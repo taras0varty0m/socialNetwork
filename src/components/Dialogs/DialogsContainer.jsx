@@ -6,35 +6,45 @@ import {
   updateNewMessageTextActionCreator,
 } from "../../redux/dialogsReducer";
 import Dialogs from "./Dialogs";
+import StoreContext from "../../storeContext";
 
-const DialogsContainer = (props) => {
-  let state = props.store.getState();
-  let dialogsElements = state.dialogsPage.dialogsData.map((dialog) => (
-    <DialogItem
-      name={dialog.name}
-      id={dialog.id}
-      ava={dialog.avatar}
-      key={dialog.id}
-    />
-  ));
-  let messagesElements = state.dialogsPage.messagesData.map((message) => (
-    <Message message={message.message} key={message.id} />
-  ));
-  const addMessage = () => {
-    props.store.dispatch(addMessageActionCreator());
-  };
-  let onMessageChange = (text) => {
-    props.store.dispatch(updateNewMessageTextActionCreator(text));
-  };
+const DialogsContainer = () => {
   return (
-    <Dialogs
-      dialogsPage={state.dialogsPage}
-      addMessage={addMessage}
-      onMessageChange={onMessageChange}
-      dispatch={props.store.dispatch}
-      dialogsElements={dialogsElements}
-      messagesElements={messagesElements}
-    />
+    <StoreContext.Consumer>
+      {(store) => {
+        let dialogsElements = store
+          .getState()
+          .dialogsPage.dialogsData.map((dialog) => (
+            <DialogItem
+              name={dialog.name}
+              id={dialog.id}
+              ava={dialog.avatar}
+              key={dialog.id}
+            />
+          ));
+        let messagesElements = store
+          .getState()
+          .dialogsPage.messagesData.map((message) => (
+            <Message message={message.message} key={message.id} />
+          ));
+        const addMessage = () => {
+          store.dispatch(addMessageActionCreator());
+        };
+        let onMessageChange = (text) => {
+          store.dispatch(updateNewMessageTextActionCreator(text));
+        };
+        return (
+          <Dialogs
+            dialogsPage={store.getState().dialogsPage}
+            addMessage={addMessage}
+            onMessageChange={onMessageChange}
+            dispatch={store.dispatch}
+            dialogsElements={dialogsElements}
+            messagesElements={messagesElements}
+          />
+        );
+      }}
+    </StoreContext.Consumer>
   );
 };
 export default DialogsContainer;

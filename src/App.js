@@ -11,8 +11,7 @@ import Friends from "./components/Friends/Friends";
 import NotFound from "./components/NotFound/NotFound";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 
-const App = (props) => {
-  debugger;
+const App = () => {
   return (
     <div className="app-wrapper">
       <Header />
@@ -24,23 +23,12 @@ const App = (props) => {
           <Route exact path="/">
             <Redirect to="/news" />
           </Route>
-          <Route
-            path="/dialogs"
-            render={() => <DialogsContainer store={props.store} />}
-          />
-          <Route
-            path="/profile"
-            render={() => <Profile store={props.store} />}
-          />
+          <Route path="/dialogs" render={() => <DialogsContainer />} />
+          <Route path="/profile" render={() => <Profile />} />
           <Route path="/music" render={() => <Music />} />
           <Route path="/settings" render={() => <Settings />} />
           <Route path="/news" render={() => <News />} />
-          <Route
-            path="/friends"
-            render={() => (
-              <Friends friendsData={props.state.friendsPage.friendsData} />
-            )}
-          />
+          <Route path="/friends" render={() => <Friends />} />
           <Route component={NotFound} />
         </Switch>
       </div>
