@@ -58,6 +58,15 @@ const Navbar = (props) => {
           <div>Settings</div>
         </NavLink>
       </div>
+      <div className={s.item}>
+        <NavLink to="/users" activeClassName={s.activeLink}>
+          <img
+            alt="Users"
+            src="https://img.icons8.com/ios/24/000000/groups.png"
+          />
+          <div>Users</div>
+        </NavLink>
+      </div>
     </nav>
   );
 };
