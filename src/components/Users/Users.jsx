@@ -1,45 +1,15 @@
+import axios from "axios";
 import React from "react";
 import s from "./Users.module.css";
+import userPhoto from "../../assets/images/no_avatar.png"
 const Users = (props) => {
   if (props.users.length === 0) {
-    props.setUsers([
-      {
-        id: 1,
-        followed: true,
-        fullName: "Dmitri",
-        status: "i'm horse pegs",
-        photoURL:
-          "https://www.meme-arsenal.com/memes/24ea176ff61da30ee142f0dbca6dcc90.jpg",
-        location: { city: "Minsk", country: "Belarus" },
-      },
-      {
-        id: 2,
-        followed: false,
-        fullName: "Sasha",
-        status: "i'm horse pegs",
-        photoURL:
-          "https://www.meme-arsenal.com/memes/24ea176ff61da30ee142f0dbca6dcc90.jpg",
-        location: { city: "Minsk", country: "Belarus" },
-      },
-      {
-        id: 3,
-        followed: true,
-        fullName: "Misha",
-        status: "i'm horse pegs",
-        photoURL:
-          "https://www.meme-arsenal.com/memes/24ea176ff61da30ee142f0dbca6dcc90.jpg",
-        location: { city: "Minsk", country: "Belarus" },
-      },
-      {
-        id: 4,
-        followed: true,
-        fullName: "Glasha",
-        status: "i'm horse pegs",
-        photoURL:
-          "https://www.meme-arsenal.com/memes/24ea176ff61da30ee142f0dbca6dcc90.jpg",
-        location: { city: "Minsk", country: "Belarus" },
-      },
-    ]);
+    axios
+      .get("https://social-network.samuraijs.com/api/1.0/users")
+      .then((response) => {
+        console.log(response.data.items)
+        props.setUsers(response.data.items);
+      });
   }
 
   return (
@@ -48,7 +18,7 @@ const Users = (props) => {
         <div key={u.id}>
           <span>
             <div>
-              <img alt="ava" src={u.photoURL} className={s.ava} />
+              <img alt="ava" src={u.photos.small != null ? u.photos.small : userPhoto} className={s.ava} />
             </div>
             <div>
               {u.followed ? (
@@ -72,12 +42,8 @@ const Users = (props) => {
           </span>
           <span>
             <span>
-              <div>{u.fullName}</div>
-              <div>{u.status}</div>
-            </span>
-            <span>
-              <div>{u.location.country}</div>
-              <div>{u.location.city}</div>
+              <div>shortname: {u.name}</div>
+              <div>{u.status != null ? "status:" + u.status : ""}</div>
             </span>
           </span>
         </div>
