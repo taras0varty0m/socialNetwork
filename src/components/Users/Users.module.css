@@ -1,3 +1,6 @@
+.selectedPage {
+  font-weight: bold;
+}
 .content {
   color: black;
   padding: 1%;
