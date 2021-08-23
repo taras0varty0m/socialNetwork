@@ -4,6 +4,7 @@ import {
   UNFOLLOW,
   SET_CURRENT_PAGE,
   SET_TOTAL_USERS_COUNT,
+  TOGGLE_IS_FETCHING,
 } from "./ActionType";
 
 let initialState = {
@@ -11,6 +12,7 @@ let initialState = {
   pageSize: 100,
   totalUsersCount: 0,
   currentPage: 1,
+  isFetching: true,
 };
 const usersReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -54,13 +56,24 @@ const usersReducer = (state = initialState, action) => {
         totalUsersCount: action.totalUsersCount,
       };
     }
+    case TOGGLE_IS_FETCHING: {
+      return {
+        ...state,
+        isFetching: action.isFetching,
+      };
+    }
     default:
       return state;
   }
 };
+
 export const setTotalUsersCountAC = (totalUsersCount) => ({
   type: SET_TOTAL_USERS_COUNT,
   totalUsersCount,
+});
+export const toggleIsFetchingAC = (isFetching) => ({
+  type: TOGGLE_IS_FETCHING,
+  isFetching,
 });
 export const setCurrentPageAC = (currentPage) => ({
   type: SET_CURRENT_PAGE,
