@@ -1,5 +1,5 @@
 import axios from "axios";
-import React from "react";
+import React, { useCallback, useEffect } from "react";
 import { connect } from "react-redux";
 import {
   follow,
@@ -11,48 +11,61 @@ import {
 } from "../../redux/usersReducer";
 import Preloader from "../Preloader/Preloader";
 import Users from "./Users";
-class UsersContainer extends React.Component {
-  onPageChanged = (p) => {
-    this.props.setCurrentPage(p);
-    this.props.toggleIsFetching(true);
+const UsersContainer = ({
+  toggleIsFetching,
+  currentPage,
+  pageSize,
+  setUsers,
+  setTotalUsersCount,
+  setCurrentPage,
+  isFetching,
+  totalUsersCount,
+  users,
+  unfollow,
+  follow,
+}) => {
+  useEffect(() => {
+    toggleIsFetching(true);
     axios
       .get(
-        `https://social-network.samuraijs.com/api/1.0/users?page=${p}&count=${this.props.pageSize}`
+        `https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${pageSize}`
       )
       .then((response) => {
-        this.props.toggleIsFetching(false);
-        this.props.setUsers(response.data.items);
+        toggleIsFetching(false);
+        setUsers(response.data.items);
+        setTotalUsersCount(response.data.totalCount);
       });
-  };
-  componentDidMount() {
-    this.props.toggleIsFetching(true);
-    axios
-      .get(
-        `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`
-      )
-      .then((response) => {
-        this.props.toggleIsFetching(false);
-        this.props.setUsers(response.data.items);
-        this.props.setTotalUsersCount(response.data.totalCount);
-      });
-  }
-  render() {
-    return (
-      <>
-        {this.props.isFetching ? <Preloader /> : null}
-        <Users
-          totalUsersCount={this.props.totalUsersCount}
-          pageSize={this.props.pageSize}
-          currentPage={this.props.currentPage}
-          onPageChanged={this.onPageChanged}
-          users={this.props.users}
-          unfollow={this.props.unfollow}
-          follow={this.props.follow}
-        />
-      </>
-    );
-  }
-}
+  }, [currentPage, pageSize, setTotalUsersCount, setUsers, toggleIsFetching]);
+  const onPageChanged = useCallback(
+    (p) => {
+      setCurrentPage(p);
+      toggleIsFetching(true);
+      axios
+        .get(
+          `https://social-network.samuraijs.com/api/1.0/users?page=${p}&count=${pageSize}`
+        )
+        .then((response) => {
+          toggleIsFetching(false);
+          setUsers(response.data.items);
+        });
+    },
+    [pageSize, setCurrentPage, setUsers, toggleIsFetching]
+  );
+  return (
+    <>
+      {isFetching && <Preloader />}
+      <Users
+        totalUsersCount={totalUsersCount}
+        pageSize={pageSize}
+        currentPage={currentPage}
+        onPageChanged={onPageChanged}
+        users={users}
+        unfollow={unfollow}
+        follow={follow}
+      />
+    </>
+  );
+};
 
 let mapStateToProps = (state) => {
   return {

@@ -1,5 +1,5 @@
-import s from "./Dialogs.module.css";
 import React from "react";
+import s from "./Dialogs.module.css";
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 const Dialogs = (props) => {
@@ -8,15 +8,14 @@ const Dialogs = (props) => {
   };
   let onMessageChange = (e) => {
     let text = e.target.value;
-    props.onMessageChange(text);
+    props.updateNewMessageText(text);
   };
-  let dialogsElements = props.dialogsPage.dialogsData.map((d) => (
+  let dialogsElements = props.dialogsData.map((d) => (
     <DialogItem name={d.name} id={d.id} key={d.id} ava={d.avatar} />
   ));
-  let messagesElements = props.dialogsPage.messagesData.map((m) => (
+  let messagesElements = props.messagesData.map((m) => (
     <Message message={m.message} key={m.id} />
   ));
-
   return (
     <div className={s.dialogs}>
       <div className={s.dialogsItems}>{dialogsElements}</div>
@@ -26,7 +25,7 @@ const Dialogs = (props) => {
         <textarea
           name="text"
           rows="3"
-          value={props.dialogsPage.newMessageText}
+          value={props.newMessageText}
           onChange={onMessageChange}
           placeholder="Введите сообщение"
         />
