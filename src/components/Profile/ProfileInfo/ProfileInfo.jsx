@@ -1,6 +1,6 @@
 import Preloader from "../../Preloader/Preloader";
 import s from "./ProfileInfo.module.css";
-
+import userPhoto from "../../../assets/images/no_avatar.png";
 const ProfileInfo = (props) => {
   if (!props.profile) return <Preloader />;
 
@@ -14,8 +14,11 @@ const ProfileInfo = (props) => {
         />
       </div>
       <div className={s.descriptionBlock}>
-        <img src={props.profile.photos.large} alt="profile avatar" /> +
-        description
+        <img
+          src={props.profile.photos.large || userPhoto}
+          alt="profile avatar"
+        />{" "}
+        + description
       </div>
     </div>
   );

@@ -2,12 +2,14 @@ import React from "react";
 import s from "./Users.module.css";
 import userPhoto from "../../assets/images/no_avatar.png";
 import { NavLink } from "react-router-dom";
+import { follow, unfollow } from "../../api/api";
 let Users = (props) => {
   let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
   let pages = [];
   for (let i = 1; i <= pagesCount; i++) {
     pages.push(i);
   }
+
   return (
     <div className={s.content}>
       <div>
@@ -36,16 +38,26 @@ let Users = (props) => {
             <div>
               {u.followed ? (
                 <button
+                  disabled={props.followingInProgress.some((id) => id === u.id)}
                   onClick={() => {
-                    props.unfollow(u.id);
+                    props.toggleFollowingProgress(true, u.id);
+                    unfollow(u.id).then((response) => {
+                      if (response.data.resultCode === 0) props.unfollow(u.id);
+                      props.toggleFollowingProgress(false, u.id);
+                    });
                   }}
                 >
                   UNFOLLOW
                 </button>
               ) : (
                 <button
+                  disabled={props.followingInProgress.some((id) => id === u.id)}
                   onClick={() => {
-                    props.follow(u.id);
+                    props.toggleFollowingProgress(true, u.id);
+                    follow(u.id).then((response) => {
+                      if (response.data.resultCode === 0) props.follow(u.id);
+                      props.toggleFollowingProgress(false, u.id);
+                    });
                   }}
                 >
                   FOLLOW
