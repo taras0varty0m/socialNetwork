@@ -10,6 +10,7 @@ import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
+import Login from "./components/Login/Login";
 
 const App = () => {
   return (
@@ -23,9 +24,9 @@ const App = () => {
           <Route exact path="/">
             <Redirect to="/news" />
           </Route>
+          <Route path="/login" render={() => <Login />} />
           <Route path="/dialogs" render={() => <DialogsContainer />} />
-          <Route path="/profile/:userId" render={() => <ProfileContainer />} />
-          <Route path="/profile" render={() => <ProfileContainer />} />
+          <Route path="/profile/:userId?" render={() => <ProfileContainer />} />
           <Route path="/music" render={() => <Music />} />
           <Route path="/settings" render={() => <Settings />} />
           <Route path="/news" render={() => <News />} />
