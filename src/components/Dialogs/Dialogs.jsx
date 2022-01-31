@@ -2,13 +2,10 @@ import React from "react";
 import s from "./Dialogs.module.css";
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
+import { AddMessageForm } from "./AddMessageForm";
 const Dialogs = (props) => {
-  const addMessage = () => {
-    props.addMessage();
-  };
-  let onMessageChange = (e) => {
-    let text = e.target.value;
-    props.updateNewMessageText(text);
+  const addMessage = ({ message }) => {
+    props.addMessage(message);
   };
   let dialogsElements = props.dialogsData.map((d) => (
     <DialogItem name={d.name} id={d.id} key={d.id} ava={d.avatar} />
@@ -21,20 +18,10 @@ const Dialogs = (props) => {
       <div className={s.dialogsItems}>{dialogsElements}</div>
       <div className={s.messages}>{messagesElements}</div>
       <div className={s.form}>
-        <h3>New message</h3>
-        <textarea
-          name="text"
-          rows="3"
-          value={props.newMessageText}
-          onChange={onMessageChange}
-          placeholder="Введите сообщение"
-        />
-        <br />
-        <button onClick={addMessage} className={s.submit}>
-          Add message
-        </button>
+        <AddMessageForm onSubmit={addMessage} />
       </div>
     </div>
   );
 };
+
 export default Dialogs;

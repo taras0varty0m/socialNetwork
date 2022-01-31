@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import Login from "../components/Login/Login";
+import LoginContainer from "../components/Login/LoginContainer";
 
 const mapStateToProps = (state) => ({
   isAuth: state.auth.isAuth,
@@ -8,7 +8,7 @@ const mapStateToProps = (state) => ({
 
 export const withAuthRedirect = (WrappedComponent) => {
   const hocComponent = ({ ...props }) =>
-    props.isAuth ? <WrappedComponent {...props} /> : <Login />;
+    props.isAuth ? <WrappedComponent {...props} /> : <LoginContainer />;
 
   const connectedAuthRedirectComponent = connect(mapStateToProps)(hocComponent);
 

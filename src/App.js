@@ -1,6 +1,6 @@
-import React from "react";
 import "./App.css";
-import { Redirect, Route, Switch } from "react-router-dom";
+import React from "react";
+import { Navigate, Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
@@ -10,7 +10,7 @@ import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
-import Login from "./components/Login/Login";
+import LoginContainer from "./components/Login/LoginContainer";
 
 const App = () => {
   return (
@@ -20,19 +20,18 @@ const App = () => {
       <Navbar />
 
       <div className="app-wrapper-content">
-        <Switch>
-          <Route exact path="/">
-            <Redirect to="/news" />
-          </Route>
-          <Route path="/login" render={() => <Login />} />
-          <Route path="/dialogs" render={() => <DialogsContainer />} />
-          <Route path="/profile/:userId?" render={() => <ProfileContainer />} />
-          <Route path="/music" render={() => <Music />} />
-          <Route path="/settings" render={() => <Settings />} />
-          <Route path="/news" render={() => <News />} />
-          <Route path="/users" render={() => <UsersContainer />} />
-          <Route component={NotFound} />
-        </Switch>
+        <Routes>
+          <Route index element={<Navigate to="/news" />}></Route>
+          <Route path="/login" element={<LoginContainer />} />
+          <Route path="/dialogs" element={<DialogsContainer />} />
+          <Route path="/profile/" element={<ProfileContainer />} />
+          <Route path="/profile/:userId" element={<ProfileContainer />} />
+          <Route path="/music" element={<Music />} />
+          <Route path="/settings" element={<Settings />} />
+          <Route path="/news" element={<News />} />
+          <Route path="/users" element={<UsersContainer />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
       </div>
     </div>
   );

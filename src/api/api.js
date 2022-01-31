@@ -14,12 +14,6 @@ const UserAPI = {
       .then((response) => response.data);
   },
 
-  getUserProfile(userId) {
-    return api.get(
-      `https://social-network.samuraijs.com/api/1.0/profile/${userId}`
-    );
-  },
-
   follow(id) {
     return api.post(`follow/${id}`, {});
   },
@@ -28,9 +22,26 @@ const UserAPI = {
     return api.delete(`follow/${id}`, {});
   },
 };
-const AuthAPI = {
-  authMe() {
-    return api.get("https://social-network.samuraijs.com/api/1.0/auth/me");
+const ProfileAPI = {
+  getProfile(userId) {
+    return api.get(`profile/${userId}`);
+  },
+  getStatus(userId) {
+    return api.get(`profile/status/${userId}`);
+  },
+  updateStatus(status) {
+    return api.put(`profile/status`, { status: status });
   },
 };
-export { UserAPI, AuthAPI };
+const AuthAPI = {
+  authMe() {
+    return api.get("auth/me");
+  },
+  login({ email, password, remember, captcha }) {
+    return api.post("auth/login", { email, password, remember, captcha });
+  },
+  logout() {
+    return api.delete("auth/login");
+  },
+};
+export { UserAPI, AuthAPI, ProfileAPI };
